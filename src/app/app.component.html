@@ -1,0 +1,22 @@
+<div  class="header">
+  <nav>
+    <a class="logo">dotScource</a>
+    <a routerLink="/produkt" routerLinkActive="active current">Produkt</a> 
+    <div class="header-right">
+    <a  routerLink="/Warekorb" routerLinkActive="active current">Warekorb</a>
+      <div class="header_menu_cart">
+        <mat-icon>shopping_cart</mat-icon>   
+        <p class= "header_cart_number">{{Warekorb.getCartLength()}}</p>
+      </div>
+    </div>
+  </nav>
+</div>
+<router-outlet></router-outlet>
+
+<div style="display: none;">
+
+<app-produkt></app-produkt>
+<app-warenkorb></app-warenkorb>
+
+
+</div>

@@ -1,0 +1,79 @@
+<div class="checkout">
+
+	<div class="checkout_products">
+		<!-- If cart empty -->
+		<div class="checkout_left">
+			<div class="checkout_empty" *ngIf = "warenkorb.getCartLength() == 0">
+				<h2>Keine Bestellung aufgegeben</h2>
+			</div>
+		</div>
+
+		<!-- if cart empty ends  -->
+
+
+		<!-- if cart not empty -->
+		<div *ngIf = "warenkorb.getCartLength() !=0">
+		<p class="price">Preis</p>
+		<div class="checkout_product" *ngFor = "let w of waren">
+	       <img src="{{w.produkt.image}}" alt="" class="checkout_product_img">
+	       <div class="checkout_product_info">
+	           
+	           <p class="checkout_product_title">{{w.produkt.title}}</p>
+	           <p class="checkout_product_in_stock">In Stock</p>
+	          <div class="checkout_product_gift">
+	             
+	              <input type="checkbox">
+	              <p>This is a gift</p>
+	              <a routerLink="/" class="checkout_product_more"> Learn more</a>
+	          </div>
+	          <div class="checkout_options">
+	            <div class="checkout_dropdown">
+
+	       
+	              </div>
+	              <label>
+	              <input class="input"  type="text" ng-model= "warenkorb.menge" name ="menge" value={{w.quantity}}>
+	              Menge
+	              </label>
+	              	
+	              <a (click)="removeItem(w)"> Löschen</a>
+	               <a href="#">Auf die Merkliste</a>
+	              <a href="#">Weitere Artikel wie diese</a>
+
+	          </div>
+	          
+	       </div>
+
+
+	       <div class="checkout_products_price">
+	           <p> <strong>{{priceCalc(w.produkt.price, w.quantity)}}€</strong> </p>
+
+	       </div>
+	    </div>
+	    <!-- if cart not empty ends -->
+
+	    <div class="checkout_products_subtotal">
+	        <p>Subtotal ({{warenkorb.getCartLength()}} Artikel):
+	             <strong>{{warenkorb.getTotal()}}€</strong> </p>
+
+	    </div>
+	    </div>
+
+	</div>	
+
+
+	<!-- right side  -->
+	<div class="subTotal" *ngIf = "warenkorb.getCartLength() > 0">
+		<p><strong>Summe</strong>({{warenkorb.getCartLength()}} Artikel): {{changeCount}} </p>
+		<div class="subtotal_gift">
+			<!-- <input class="inputRabatt" type="text" value="20%" onchange="rabattCalc(value)"><label>Rabatt</label> -->
+
+			<input class="inputRabatt" type="text" TagName = "inputRabatt" (change)="changed($event)"><label>Rabatt(%)</label>
+
+		</div>
+		<button class="subButton">Proceed to checkout</button>
+	</div>
+	<!-- right side ends -->
+</div>
+
+
